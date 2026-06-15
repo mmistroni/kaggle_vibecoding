@@ -1,10 +1,21 @@
 {
-  "name": "Python & Antigravity Dev Environment",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
+  "name": "Google Antigravity & Python Engine",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.11",
       "installTools": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${webContents:workspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvInTerminal": true
+      },
+      "extensions": [
+        "ms-python.python"
+      ]
     }
   },
   "postCreateCommand": "bash .devcontainer/setup.sh"
