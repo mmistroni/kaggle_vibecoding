@@ -7,8 +7,11 @@
       "installTools": true
     }
   },
-  "containerEnv": {
-    "PATH": "${containerSandboxStructure}/home/vscode/.local/bin:${localEnv:PATH}"
+  "remoteEnv": {
+    // Forwards your local/repository secrets into the terminal environment
+    "GEMINI_API_KEY": "${localEnv:GEMINI_API_KEY}",
+    "GOOGLE_APPLICATION_CREDENTIALS": "${localEnv:GOOGLE_APPLICATION_CREDENTIALS}",
+    "PATH": "/home/vscode/.local/bin:${containerEnv:PATH}"
   },
   "customizations": {
     "vscode": {

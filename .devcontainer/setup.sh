@@ -4,17 +4,33 @@ set -e
 echo "=== 1. Setting up Python Virtual Environment ==="
 python3 -m venv .venv
 source .venv/bin/activate
-# Ensure we stay inside virtualenv context for pip
 .venv/bin/pip install --upgrade pip
 
-echo "=== 2. Downloading Google Antigravity CLI Platform ==="
-# Added -s flag if the installer supports non-interactive silent flags, otherwise standard curl pipeline
+echo "=== 2. Creating Agent Workspace Ignore Safeguards ==="
+# Prevent agy from blowing token limits by indexing the virtual env
+if [ ! -f "AGENTS.md" ]; then
+    cat << 'EOF' > AGENTS.md
+# Workspace Rules
+ignore:
+  - .venv/
+  - __pycache__/
+  - .git/
+EOF
+    echo "Created AGENTS.md with default ignore rules."
+fi
+
+echo "=== 3. Downloading Google Antigravity CLI Platform ==="
+# Run the installation script natively
 curl -fsSL https://antigravity.google/cli/install.sh | bash
 
-echo "=== 3. Verifying Installation ==="
-# Verify via absolute path since export PATH won't persist past this script execution lifecycle
-if [ -f "$HOME/.local/bin/agy" ] || command -v agy &> /dev/null; then
+echo "=== 4. Verifying Installation ==="
+# Explicitly evaluate path for verification step
+export PATH="$HOME/.local/bin:$PATH"
+
+if command -v agy &> /dev/null; then
     echo "Success! Google Antigravity CLI (agy) is installed and ready."
+    # Optional: run a clean check to verify auth tokens work
+    # agy status
 else
     echo "Error: agy binary not found in expected paths."
     exit 1
