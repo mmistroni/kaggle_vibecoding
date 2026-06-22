@@ -38,6 +38,7 @@ echo "=== 4. Downloading Google Antigravity CLI Platform ==="
 curl -fsSL https://antigravity.google/cli/install.sh | bash
 
 echo "=== 5. Installing Astral uv & Google Agents CLI ==="
+
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Explicitly add uv to the current script's path so it can be called immediately
