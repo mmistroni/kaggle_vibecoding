@@ -1,14 +1,16 @@
 {
-  "name": "Google Antigravity & Python Engine",
+  "name": "Google Agent & Python Engine",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.11",
       "installTools": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
     }
   },
   "remoteEnv": {
-    // Forwards your local/repository secrets into the terminal environment
     "GEMINI_API_KEY": "${localEnv:GEMINI_API_KEY}",
     "GOOGLE_APPLICATION_CREDENTIALS": "${localEnv:GOOGLE_APPLICATION_CREDENTIALS}",
     "PATH": "/home/vscode/.local/bin:${containerEnv:PATH}"
