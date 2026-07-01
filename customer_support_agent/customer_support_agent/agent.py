@@ -78,3 +78,7 @@ root_agent = Workflow(
         ),
     ],
 )
+
+from google.adk.apps import App
+
+app = App(root_agent=root_agent, name="customer_support_agent")
